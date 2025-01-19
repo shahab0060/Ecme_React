@@ -28,7 +28,7 @@ const CustomerEdit = () => {
             setIsSubmiting(false)
 
             if ((await response).status === 200) {
-                toast.push(
+                toast.push( p
                     <Notification type="success">مشتری ایجاد شد!</Notification>,
                     { placement: 'top-center' },
                 )
