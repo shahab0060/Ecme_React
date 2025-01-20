@@ -9,14 +9,14 @@ import { Controller } from 'react-hook-form'
 import { components } from 'react-select'
 import type { FormSectionBaseProps } from './types'
 import type { ControlProps, OptionProps } from 'react-select'
+import { apiGetActivityFieldsCombo, apiGetLocationsCombo } from '@/services/CustomersService'
+import type { ComboDto } from '@/@types/common'
+import CreatableSelect from 'react-select/creatable'
 
 type JobSectionProps = FormSectionBaseProps
 
-type combo = {
-    title: string
-    value: string
-}
-
+var params;
+const activityFields = await apiGetActivityFieldsCombo<ComboDto[], any>(params);
 const JobSection = ({ control, errors }: JobSectionProps) => {
     // const activityFieldsList = useMemo(() => {
     //     const activityFieldsList: Array<combo> = JSON.parse(
@@ -43,7 +43,7 @@ const JobSection = ({ control, errors }: JobSectionProps) => {
                         control={control}
                         render={({ field }) => (
                             <NumericInput
-                            
+
                                 placeholder="شروع ربات"
                                 {...field}
                             />
@@ -75,25 +75,43 @@ const JobSection = ({ control, errors }: JobSectionProps) => {
                     />
                 </FormItem>
             </div>
-            
-            <div className="flex items-end gap-4 w-full">
+
+            <div className="grid md:grid-cols-2 gap-4">
                 <FormItem
-                    className="w-full"
-                    invalid={
-                        Boolean(errors.activityFieldId)
-                    }
+                    label="بازه زمانی ربات"
+                    invalid={Boolean(errors.jobStart)}
+                    errorMessage={errors.jobInterval?.message}
+                >
+                    <Controller
+                        name="jobInterval"
+                        control={control}
+                        render={({ field }) => (
+                            <NumericInput
+
+                                placeholder="بازه زمانی ربات"
+                                {...field}
+                            />
+                        )}
+                    />
+                </FormItem>
+                <FormItem
+                    label="حوزه فعالیت"
+                    invalid={Boolean(errors.activityFieldId)}
                     errorMessage={errors.activityFieldId?.message}
+                    className="w-full"
                 >
                     <Controller
                         name="activityFieldId"
                         control={control}
                         render={({ field }) => (
-                            <NumericInput
-                                autoComplete="off"
-                                placeholder="ضمینه فعالیت"
-                                value={field.value}
-                                onChange={field.onChange}
-                                onBlur={field.onBlur}
+                            <Select
+                                placeholder="حوزه فعالیت مشتری را انتخاب کنید"
+                                componentAs={CreatableSelect}
+                                options={activityFields.map((activityField) => ({
+                                    value: activityField.value, label: activityField.title,
+                                }))}
+
+                                onChange={(option) => { option != null && option.value != undefined ? field.onChange(option.value.toString()) : 0; }}
                             />
                         )}
                     />

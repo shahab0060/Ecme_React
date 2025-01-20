@@ -55,6 +55,9 @@ export type Customer = {
     locationTitle: string
     phoneNumber: string
     activityFieldTitle: string
+    legalName:string
+    firstName:string
+    lastName:string
     img: string
     role: string
     lastOnline: number

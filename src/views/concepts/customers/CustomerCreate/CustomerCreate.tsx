@@ -22,13 +22,11 @@ const CustomerEdit = () => {
     const handleFormSubmit = async (values: CustomerFormSchema) => {
         setIsSubmiting(true)
         try {
-            const axiosResult = apiCreateCustomer(values);
-            const response = (await axiosResult).data;
-            console.log(axiosResult);
+            const response = apiCreateCustomer(values);
             setIsSubmiting(false)
 
             if ((await response).status === 200) {
-                toast.push( p
+                toast.push(
                     <Notification type="success">مشتری ایجاد شد!</Notification>,
                     { placement: 'top-center' },
                 )

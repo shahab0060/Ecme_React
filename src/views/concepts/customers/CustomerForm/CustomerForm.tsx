@@ -30,7 +30,7 @@ const validationSchema: ZodType<CustomerFormSchema> = z.object({
     jobEnd: z.union([z.string(), z.number().min(1, 'پایان ربات الزامی است!')]),
     jobInterval: z.union([z.string(), z.number().min(1, ' بازه ربات الزامی است!')]),
     locationId: z.union([z.string(), z.number().min(1, 'لوکیشن الزامی است!')]),
-    activityFieldId: z.union([z.string(), z.number().min(1, 'پایان بازه ربات الزامی است!')]),
+    activityFieldId: z.union([z.string(), z.number().min(1, 'حوزه فعالیت الزامی است!')]),
 
     legalName: z.string().min(1, { message: 'نام قانونی لازم است' }),
     phoneNumber: z
@@ -86,14 +86,14 @@ const CustomerForm = (props: CustomerFormProps) => {
                         <OverviewSection control={control} errors={errors} />
                         <JobSection control={control} errors={errors}/>
                     </div>
-                    <div className="md:w-[370px] gap-4 flex flex-col">
-                        <ProfileImageSection
+                    {/* <div className="md:w-[370px] gap-4 flex flex-col"> */}
+                        {/* <ProfileImageSection
                             control={control}
                             errors={errors}
-                        />
-                        <TagsSection control={control} errors={errors} />
+                        /> */}
+                        {/* <TagsSection control={control} errors={errors} /> */}
                         
-                    </div>
+                    {/* </div> */}
                 </div>
             </Container>
             <BottomStickyBar>{children}</BottomStickyBar>

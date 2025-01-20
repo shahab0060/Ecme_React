@@ -37,7 +37,7 @@ const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
                     />
                 </FormItem>
                 <FormItem
-                    label="نام کاربری"
+                    label="نام خانوادگی"
                     invalid={Boolean(errors.lastName)}
                     errorMessage={errors.lastName?.message}
                 >
@@ -99,7 +99,7 @@ const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
                     />
                 </FormItem>
                 <FormItem
-                    label="نام قانونی"
+                    label="نام شرکت"
                     invalid={Boolean(errors.legalName)}
                     errorMessage={errors.legalName?.message}
                 >
@@ -110,7 +110,7 @@ const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
                             <Input
                                 type="text"
                                 autoComplete="off"
-                                placeholder="نام قانونی"
+                                placeholder="نام شرکت"
                                 {...field}
                             />
                         )}

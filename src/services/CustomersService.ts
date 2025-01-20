@@ -20,14 +20,20 @@ export async function apiGetLocationsCombo<T, U extends Record<string, unknown>>
     })
 }
 
-export async function apiGetCustomer<T, U extends Record<string, unknown>>({
-    id,
-    ...params
-}: U) {
+export async function apiGetActivityFieldsCombo<T, U extends Record<string, unknown>>(
+    params: U,
+) {
+    return ApiService.fetchDataWithAxios<T>({
+        url: '/activityfield/combo',
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetCustomer<T>(id:any) {
     return ApiService.fetchDataWithAxios<T>({
         url: `/customer/${id}`,
         method: 'get',
-        params,
     })
 }
 
