@@ -1,22 +1,25 @@
+
 import { create } from 'zustand'
 import type { TableQueries } from '@/@types/common'
 import type { Product, Filter } from '../types'
 
 export const initialTableData: TableQueries = {
-    pageIndex: 1,
-    pageSize: 10,
-    query: '',
-    sort: {
-        order: '',
-        key: '',
-    },
+    pageId: 1,
+    takeEntity: 10,
+    search: '',
+    sortType : 'Descending',
+    sort:'0'
 }
 
 export const initialFilterData = {
-    minAmount: 0,
-    maxAmount: 5000,
-    productStatus: 'published',
-    productType: ['Bags', 'Cloths', 'Devices', 'Shoes', 'Watches'],
+    purchasedProducts: '',
+    purchaseChannel: [
+        'Retail Stores',
+        'Online Retailers',
+        'Resellers',
+        'Mobile Apps',
+        'Direct Sales',
+    ],
 }
 
 export type ProductsListState = {
@@ -28,8 +31,8 @@ export type ProductsListState = {
 type ProductsListAction = {
     setFilterData: (payload: Filter) => void
     setTableData: (payload: TableQueries) => void
-    setSelectedProduct: (checked: boolean, customer: Product) => void
-    setSelectAllProduct: (customer: Product[]) => void
+    setSelectedProduct: (checked: boolean, product: Product) => void
+    setSelectAllProduct: (product: Product[]) => void
 }
 
 const initialState: ProductsListState = {
@@ -50,7 +53,9 @@ export const useProductListStore = create<
             if (checked) {
                 return { selectedProduct: [...prevData, ...[row]] }
             } else {
-                if (prevData.some((prevProduct) => row.id === prevProduct.id)) {
+                if (
+                    prevData.some((prevProduct) => row.id === prevProduct.id)
+                ) {
                     return {
                         selectedProduct: prevData.filter(
                             (prevProduct) => prevProduct.id !== row.id,
@@ -62,3 +67,4 @@ export const useProductListStore = create<
         }),
     setSelectAllProduct: (row) => set(() => ({ selectedProduct: row })),
 }))
+

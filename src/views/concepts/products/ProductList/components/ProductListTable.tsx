@@ -1,45 +1,46 @@
-import { useMemo, useState } from 'react'
+
+import { useMemo } from 'react'
+import { useState } from 'react'
 import Avatar from '@/components/ui/Avatar'
-import Progress from '@/components/ui/Progress'
+import Tag from '@/components/ui/Tag'
 import Tooltip from '@/components/ui/Tooltip'
 import DataTable from '@/components/shared/DataTable'
-import ConfirmDialog from '@/components/shared/ConfirmDialog'
 import useProductList from '../hooks/useProductList'
-import classNames from '@/utils/classNames'
+import { Link, useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
-import { useNavigate } from 'react-router-dom'
-import { TbPencil, TbTrash } from 'react-icons/tb'
-import { FiPackage } from 'react-icons/fi'
-import { NumericFormat } from 'react-number-format'
+import { TbPencil, TbEye, TbTrash } from 'react-icons/tb'
 import type { OnSortParam, ColumnDef, Row } from '@/components/shared/DataTable'
 import type { Product } from '../types'
 import type { TableQueries } from '@/@types/common'
+import { apiDeleteProduct, apiGetProduct, apiGetProductsList } from '@/services/ProductsService'
+import Notification from '@/components/ui/Notification'
+import toast from '@/components/ui/toast'
 
-const ProductColumn = ({ row }: { row: Product }) => {
+const NameColumn = ({ row }: { row: Product }) => {
     return (
-        <div className="flex items-center gap-2">
-            <Avatar
-                shape="round"
-                size={60}
-                {...(row.img ? { src: row.img } : { icon: <FiPackage /> })}
-            />
-            <div>
-                <div className="font-bold heading-text mb-1">{row.name}</div>
-                <span>کد محصول: {row.productCode}</span>
-            </div>
+        <div className="flex items-center">
+            <Link
+                className={`hover:text-primary ml-2 rtl:mr-2 font-semibold text-gray-900 dark:text-gray-100`}
+                to={`/concepts/products/product-details/${row.id}`}
+            >
+                {row.name}
+            </Link>
         </div>
     )
 }
+
 const ActionColumn = ({
     onEdit,
+    onViewDetail,
     onDelete,
 }: {
     onEdit: () => void
+    onViewDetail: () => void
     onDelete: () => void
 }) => {
     return (
-        <div className="flex items-center justify-end gap-3">
-            <Tooltip title="ویرایش">
+        <div className="flex items-center gap-3">
+            <Tooltip title="ویرایش کنید">
                 <div
                     className={`text-xl cursor-pointer select-none font-semibold`}
                     role="button"
@@ -48,7 +49,16 @@ const ActionColumn = ({
                     <TbPencil />
                 </div>
             </Tooltip>
-            <Tooltip title="حذف">
+            <Tooltip title="مشاهده کنید">
+                <div
+                    className={`text-xl cursor-pointer select-none font-semibold`}
+                    role="button"
+                    onClick={onViewDetail}
+                >
+                    <TbEye />
+                </div>
+            </Tooltip>
+            <Tooltip title="حذف کنید">
                 <div
                     className={`text-xl cursor-pointer select-none font-semibold`}
                     role="button"
@@ -64,38 +74,6 @@ const ActionColumn = ({
 const ProductListTable = () => {
     const navigate = useNavigate()
 
-    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
-    const [toDeleteId, setToDeleteId] = useState('')
-
-    const handleCancel = () => {
-        setDeleteConfirmationOpen(false)
-    }
-
-    const handleDelete = (product: Product) => {
-        setDeleteConfirmationOpen(true)
-        setToDeleteId(product.id)
-    }
-
-    const handleEdit = (product: Product) => {
-        navigate(`/concepts/products/product-edit/${product.id}`)
-    }
-
-    const handleConfirmDelete = () => {
-        const newProductList = productList.filter((product) => {
-            return !(toDeleteId === product.id)
-        })
-        setSelectAllProduct([])
-        mutate(
-            {
-                list: newProductList,
-                total: productListTotal - selectedProduct.length,
-            },
-            false,
-        )
-        setDeleteConfirmationOpen(false)
-        setToDeleteId('')
-    }
-
     const {
         productList,
         productListTotal,
@@ -105,87 +83,72 @@ const ProductListTable = () => {
         setSelectAllProduct,
         setSelectedProduct,
         selectedProduct,
-        mutate,
     } = useProductList()
+
+    const handleEdit = (product: Product) => {
+        navigate(`/concepts/products/product-edit/${product.id}`)
+    }
+
+    const handleViewDetails = (product: Product) => {
+        navigate(`/concepts/products/product-details/${product.id}`)
+    }
+    const [isSubmiting, setIsSubmiting] = useState(false)
+
+    const handleDelete = async (product: Product) => {
+        if (product.id) {
+            try {
+                const response = await apiDeleteProduct(product.id);
+                setIsSubmiting(false)
+
+                if (response.status === 200) {
+                    toast.push(
+                        <Notification type="success">محصول حذف شد!</Notification>,
+                        { placement: 'top-center' },
+                    )
+                    navigate('/concepts/products/product-list')
+                    return;
+                }
+                if (response.status === 400) {
+                    toast.push(
+                        <Notification type="danger">${response.data}</Notification>,
+                        { placement: 'top-center' },
+                    )
+                }
+                return;
+            }
+            catch {
+
+            }
+        }
+        toast.push(
+            <Notification type="danger">مشکلی در انجام عملیات پیش آمد</Notification>,
+            { placement: 'top-center' },
+        )
+    }
 
     const columns: ColumnDef<Product>[] = useMemo(
         () => [
             {
-                header: 'محصول',
+                header: 'نام',
                 accessorKey: 'name',
                 cell: (props) => {
                     const row = props.row.original
-                    return <ProductColumn row={row} />
+                    return <NameColumn row={row} />
                 },
             },
-            {
-                header: 'قیمت',
-                accessorKey: 'price',
-                cell: (props) => {
-                    const { price } = props.row.original
-                    return (
-                        <span className="font-bold heading-text">
-                            <NumericFormat
-                                fixedDecimalScale
-                                prefix="$"
-                                displayType="text"
-                                value={price}
-                                decimalScale={2}
-                                thousandSeparator={true}
-                            />
-                        </span>
-                    )
-                },
-            },
-            {
-                header: 'مقدار',
-                accessorKey: 'stock',
-                cell: (props) => {
-                    const row = props.row.original
-                    return (
-                        <span className="font-bold heading-text">
-                            {row.stock}
-                        </span>
-                    )
-                },
-            },
-            {
-                header: 'فروش',
-                accessorKey: 'status',
-                cell: (props) => {
-                    const { salesPercentage, sales } = props.row.original
-                    return (
-                        <div className="flex flex-col gap-1">
-                            <span className="flex gap-1">
-                                <span className="font-semibold">
-                                    <NumericFormat
-                                        displayType="text"
-                                        value={sales}
-                                        thousandSeparator={true}
-                                    />
-                                </span>
-                                <span>فروش</span>
-                            </span>
-                            <Progress
-                                percent={salesPercentage}
-                                showInfo={false}
-                                customColorClass={classNames(
-                                    'bg-error',
-                                    salesPercentage > 40 && 'bg-warning',
-                                    salesPercentage > 70 && 'bg-success',
-                                )}
-                            />
-                        </div>
-                    )
-                },
-            },
+            
             {
                 header: '',
                 id: 'action',
                 cell: (props) => (
                     <ActionColumn
                         onEdit={() => handleEdit(props.row.original)}
-                        onDelete={() => handleDelete(props.row.original)}
+                        onViewDetail={() =>
+                            handleViewDetails(props.row.original)
+                        }
+                        onDelete={() =>
+                            handleDelete(props.row.original)
+                        }
                     />
                 ),
             },
@@ -203,20 +166,28 @@ const ProductListTable = () => {
 
     const handlePaginationChange = (page: number) => {
         const newTableData = cloneDeep(tableData)
-        newTableData.pageIndex = page
+        newTableData.pageId = page
         handleSetTableData(newTableData)
     }
 
     const handleSelectChange = (value: number) => {
         const newTableData = cloneDeep(tableData)
-        newTableData.pageSize = Number(value)
-        newTableData.pageIndex = 1
+        newTableData.takeEntity = Number(value)
+        newTableData.pageId = 1
         handleSetTableData(newTableData)
     }
 
     const handleSort = (sort: OnSortParam) => {
+        var key = sort.key;
+        var order = sort.order;
+        if (key == null || key == "" || key == '')
+            key = '0';
+        if (order == null || order == "")
+            order = 'ascending';
         const newTableData = cloneDeep(tableData)
-        newTableData.sort = sort
+        newTableData.sort = key as string;
+        newTableData.sortType = order;
+
         handleSetTableData(newTableData)
     }
 
@@ -234,47 +205,29 @@ const ProductListTable = () => {
     }
 
     return (
-        <>
-            <DataTable
-                selectable
-                columns={columns}
-                data={productList}
-                noData={!isLoading && productList.length === 0}
-                skeletonAvatarColumns={[0]}
-                skeletonAvatarProps={{ width: 28, height: 28 }}
-                loading={isLoading}
-                pagingData={{
-                    total: productListTotal,
-                    pageIndex: tableData.pageIndex as number,
-                    pageSize: tableData.pageSize as number,
-                }}
-                checkboxChecked={(row) =>
-                    selectedProduct.some((selected) => selected.id === row.id)
-                }
-                onPaginationChange={handlePaginationChange}
-                onSelectChange={handleSelectChange}
-                onSort={handleSort}
-                onCheckBoxChange={handleRowSelect}
-                onIndeterminateCheckBoxChange={handleAllRowSelect}
-            />
-            <ConfirmDialog
-                isOpen={deleteConfirmationOpen}
-                type="danger"
-                title="حذف محصولات"
-                onClose={handleCancel}
-                onRequestClose={handleCancel}
-                onCancel={handleCancel}
-                onConfirm={handleConfirmDelete}
-            >
-                <p>
-                    {' '}
-                    آیا مطمئن هستید که می خواهید این محصول را حذف کنید؟ این
-                    اقدام قابل بازگشت نیست.{' '}
-                </p>
-            </ConfirmDialog>
-        </>
+        <DataTable
+            selectable
+            columns={columns}
+            data={productList}
+            noData={!isLoading && productList.length === 0}
+            skeletonAvatarColumns={[0]}
+            skeletonAvatarProps={{ width: 28, height: 28 }}
+            loading={isLoading}
+            pagingData={{
+                total: productListTotal,
+                pageId: tableData.pageId as number,
+                takeEntity: tableData.takeEntity as number,
+            }}
+            checkboxChecked={(row) =>
+                selectedProduct.some((selected) => selected.id === row.id)
+            }
+            onPaginationChange={handlePaginationChange}
+            onSelectChange={handleSelectChange}
+            onSort={handleSort}
+            onCheckBoxChange={handleRowSelect}
+            onIndeterminateCheckBoxChange={handleAllRowSelect}
+        />
     )
 }
-
 
 export default ProductListTable

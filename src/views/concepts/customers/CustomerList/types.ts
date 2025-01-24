@@ -1,43 +1,3 @@
-type PersonalInfo = {
-    location: string
-    title: string
-    birthday: string
-    phoneNumber: string
-    dialCode: string
-    address: string
-    postcode: string
-    city: string
-    country: string
-    facebook: string
-    twitter: string
-    pinterest: string
-    linkedIn: string
-}
-
-type OrderHistory = {
-    id: string
-    item: string
-    status: string
-    amount: number
-    date: number
-}
-
-type PaymentMethod = {
-    cardHolderName: string
-    cardType: string
-    expMonth: string
-    expYear: string
-    last4Number: string
-    primary: boolean
-}
-
-type Subscription = {
-    plan: string
-    status: string
-    billing: string
-    nextPaymentDate: number
-    amount: number
-}
 
 export type GetCustomersListResponse = {
     customers: Customer[]
@@ -50,21 +10,79 @@ export type Filter = {
 }
 
 export type Customer = {
-    id: string
-    displayName: string
-    locationTitle: string
-    phoneNumber: string
-    activityFieldTitle: string
-    legalName:string
-    firstName:string
-    lastName:string
-    img: string
-    role: string
-    lastOnline: number
-    status: string
-    personalInfo: PersonalInfo
-    orderHistory: OrderHistory[]
-    paymentMethod: PaymentMethod[]
-    subscription: Subscription[]
-    totalSpending: number
+    id?:number
+    
+customerTitleId?: number 
+
+
+CustomerTitleTitle?: string
+
+displayName?: string
+
+
+
+locationId?: number 
+
+
+LocationTitle?: string
+
+phoneNumber?: string
+
+
+
+securityStamp?: string
+
+
+
+otp?: string
+
+
+
+activationCode?: string
+
+
+
+activationCodeExpirationTime?: Date
+
+
+
+jobStart?: number 
+
+
+
+jobEnd?: number 
+
+
+
+jobInterval?: number 
+
+
+
+securityStampExpirationDate?: Date
+
+
+
+tokenId?: string
+
+
+
+activityFieldId?: number 
+
+
+ActivityFieldTitle?: string
+
+firstName?: string
+
+
+
+lastName?: string
+
+
+
+legalName?: string
+
+
+    createDate?:string    
+    latestEditDate?:string
 }
+

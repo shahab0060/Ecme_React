@@ -1,3 +1,5 @@
-import ProducEdit from './ProducEdit'
 
-export default ProducEdit
+import ProductEdit from './ProductEdit'
+
+export default ProductEdit
+

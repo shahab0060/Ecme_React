@@ -1,42 +1,43 @@
-import { apiGetProductList } from '@/services/ProductService'
+
+import { apiGetProductsList } from '@/services/ProductsService'
 import useSWR from 'swr'
 import { useProductListStore } from '../store/productListStore'
-import type { GetProductListResponse } from '../types'
+import type { GetProductsListResponse } from '../types'
 import type { TableQueries } from '@/@types/common'
 
-const useProductList = () => {
+export default function useProductList() {
     const {
         tableData,
         filterData,
         setTableData,
-        setFilterData,
         selectedProduct,
         setSelectedProduct,
         setSelectAllProduct,
+        setFilterData,
     } = useProductListStore((state) => state)
 
     const { data, error, isLoading, mutate } = useSWR(
-        ['/api/products', { ...tableData, ...filterData }],
+        ['Product/list', { ...tableData, ...filterData }],
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         ([_, params]) =>
-            apiGetProductList<GetProductListResponse, TableQueries>(params),
+            apiGetProductsList<GetProductsListResponse, TableQueries>(params),
         {
             revalidateOnFocus: false,
         },
     )
 
-    const productList = data?.list || []
+    const productList = data?.products || []
 
     const productListTotal = data?.total || 0
 
     return {
+        productList,
+        productListTotal,
         error,
         isLoading,
         tableData,
         filterData,
         mutate,
-        productList,
-        productListTotal,
         setTableData,
         selectedProduct,
         setSelectedProduct,
@@ -44,5 +45,3 @@ const useProductList = () => {
         setFilterData,
     }
 }
-
-export default useProductList

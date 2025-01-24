@@ -11,7 +11,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
     {
         key: 'concepts',
         path: '',
-        title: 'مفاهیم',
+        title: 'مدیریت',
         translateKey: 'nav.concepts',
         icon: 'concepts',
         type: NAV_ITEM_TYPE_TITLE,
@@ -23,152 +23,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
             },
         },
         subMenu: [
-            {
-                key: 'concepts.ai',
-                path: '',
-                title: 'هوش مصنوعی',
-                translateKey: 'nav.conceptsAi.ai',
-                icon: 'ai',
-                type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.conceptsAi.aiDesc',
-                        label: 'ابزارها و منابع هوش مصنوعی',
-                    },
-                },
-                subMenu: [
-                    {
-                        key: 'concepts.ai.chat',
-                        path: `${CONCEPTS_PREFIX_PATH}/ai/chat`,
-                        title: 'چت',
-                        translateKey: 'nav.conceptsAi.chat',
-                        icon: 'aiChat',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsAi.chatDesc',
-                                label: 'سیستم‌های چت مبتنی بر هوش مصنوعی',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.ai.image',
-                        path: `${CONCEPTS_PREFIX_PATH}/ai/image`,
-                        title: 'تصویر',
-                        translateKey: 'nav.conceptsAi.image',
-                        icon: 'aiImage',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsAi.imageDesc',
-                                label: 'پردازش تصویر با هوش مصنوعی',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                ],
-            },
-            {
-                key: 'concepts.projects',
-                path: '',
-                title: 'پروژه‌ها',
-                translateKey: 'nav.conceptsProjects.projects',
-                icon: 'projects',
-                type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.conceptsProjects.projectsDesc',
-                        label: 'مدیریت و پیگیری پروژه‌ها',
-                    },
-                },
-                subMenu: [
-                    {
-                        key: 'concepts.projects.scrumBoard',
-                        path: `${CONCEPTS_PREFIX_PATH}/projects/scrum-board`,
-                        title: 'اسکرام بورد',
-                        translateKey: 'nav.conceptsProjects.scrumBoard',
-                        icon: 'projectScrumBoard',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsProjects.scrumBoardDesc',
-                                label: 'مدیریت گردش کار اسکرام',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.projects.projectList',
-                        path: `${CONCEPTS_PREFIX_PATH}/projects/project-list`,
-                        title: 'فهرست پروژه‌ها',
-                        translateKey: 'nav.conceptsProjects.projectList',
-                        icon: 'projectList',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsProjects.projectListDesc',
-                                label: 'سازماندهی تمام پروژه‌ها',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.projects.projectDetails',
-                        path: `${CONCEPTS_PREFIX_PATH}/projects/project-details/27`,
-                        title: 'جزئیات',
-                        translateKey: 'nav.conceptsProjects.projectDetails',
-                        icon: 'projectDetails',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsProjects.projectDetailsDesc',
-                                label: 'اطلاعات دقیق پروژه',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.projects.projectTasks',
-                        path: `${CONCEPTS_PREFIX_PATH}/projects/tasks`,
-                        title: 'وظایف',
-                        translateKey: 'nav.conceptsProjects.projectTasks',
-                        icon: 'projectTask',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsProjects.projectTasksDesc',
-                                label: 'مدیریت وظایف پروژه',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.projects.projectIssue',
-                        path: `${CONCEPTS_PREFIX_PATH}/projects/tasks/1`,
-                        title: 'مشکلات',
-                        translateKey: 'nav.conceptsProjects.projectIssue',
-                        icon: 'projectIssue',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsProjects.projectIssueDesc',
-                                label: 'رفع مشکلات پروژه',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                ],
-            },
+           
             {
                 key: 'concepts.customers',
                 path: '',
@@ -200,22 +55,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         },
                         subMenu: [],
                     },
-                    {
-                        key: 'concepts.customers.customerEdit',
-                        path: `${CONCEPTS_PREFIX_PATH}/customers/customer-edit/1`,
-                        title: 'ویرایش مشتری',
-                        translateKey: 'nav.conceptsCustomers.customerEdit',
-                        icon: 'customerEdit',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsCustomers.customerEditDesc',
-                                label: 'ویرایش اطلاعات مشتری',
-                            },
-                        },
-                        subMenu: [],
-                    },
+                  
                     {
                         key: 'concepts.customers.customerCreate',
                         path: `${CONCEPTS_PREFIX_PATH}/customers/customer-create`,
@@ -232,18 +72,345 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         },
                         subMenu: [],
                     },
+                ],
+            },
+            {
+                key: 'concepts.workerEvents',
+                path: '',
+                title: 'ایونت ورکر ها',
+                translateKey: 'nav.conceptsWorkerEvents.workerEvents',
+                icon: 'workerEvents',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsWorkerEvents.workerEventsDesc',
+                        label: 'مدیریت ایونت ورکر ها',
+                    },
+                },
+                subMenu: [
                     {
-                        key: 'concepts.customers.customerDetails',
-                        path: `${CONCEPTS_PREFIX_PATH}/customers/customer-details/1`,
-                        title: 'جزئیات مشتری',
-                        translateKey: 'nav.conceptsCustomers.customerDetails',
-                        icon: 'customerDetails',
+                        key: 'concepts.workerEvents.workerEventList',
+                        path: `${CONCEPTS_PREFIX_PATH}/workerEvents/workerEvent-list`,
+                        title: 'لیست ایونت ورکر ها',
+                        translateKey: 'nav.conceptsWorkerEvents.workerEventList',
+                        icon: 'workerEventList',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
                         meta: {
                             description: {
-                                translateKey: 'nav.conceptsCustomers.customerDetailsDesc',
-                                label: 'اطلاعات دقیق مشتری',
+                                translateKey: 'nav.conceptsWorkerEvents.workerEventListDesc',
+                                label: 'لیست تمام ایونت ورکر ها',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.workerEvents.workerEventCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/workerEvents/workerEvent-create`,
+                        title: 'افزودن ایونت ورکر',
+                        translateKey: 'nav.conceptsWorkerEvents.workerEventCreate',
+                        icon: 'workerEventCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsWorkerEvents.workerEventCreateDesc',
+                                label: 'افزودن ایونت ورکر جدید',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                ],
+            },            
+            {
+                key: 'concepts.customerLicenseReasonTypes',
+                path: '',
+                title: 'نوع دلایل مجوز های کاربر',
+                translateKey: 'nav.conceptsCustomerLicenseReasonTypes.customerLicenseReasonTypes',
+                icon: 'customerLicenseReasonTypes',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsCustomerLicenseReasonTypes.customerLicenseReasonTypesDesc',
+                        label: 'مدیریت نوع دلایل مجوز های کاربر',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'concepts.customerLicenseReasonTypes.customerLicenseReasonTypeList',
+                        path: `${CONCEPTS_PREFIX_PATH}/customerLicenseReasonTypes/customerLicenseReasonType-list`,
+                        title: 'لیست نوع دلایل مجوز های کاربر',
+                        translateKey: 'nav.conceptsCustomerLicenseReasonTypes.customerLicenseReasonTypeList',
+                        icon: 'customerLicenseReasonTypeList',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsCustomerLicenseReasonTypes.customerLicenseReasonTypeListDesc',
+                                label: 'لیست تمام نوع دلایل مجوز های کاربر',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.customerLicenseReasonTypes.customerLicenseReasonTypeCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/customerLicenseReasonTypes/customerLicenseReasonType-create`,
+                        title: 'افزودن نوع دلیل مجوز کاربر',
+                        translateKey: 'nav.conceptsCustomerLicenseReasonTypes.customerLicenseReasonTypeCreate',
+                        icon: 'customerLicenseReasonTypeCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsCustomerLicenseReasonTypes.customerLicenseReasonTypeCreateDesc',
+                                label: 'افزودن نوع دلیل مجوز کاربر جدید',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'concepts.customerLicenseTypes',
+                path: '',
+                title: 'نوع مجوزهای کاربران',
+                translateKey: 'nav.conceptsCustomerLicenseTypes.customerLicenseTypes',
+                icon: 'customerLicenseTypes',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsCustomerLicenseTypes.customerLicenseTypesDesc',
+                        label: 'مدیریت نوع مجوزهای کاربران',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'concepts.customerLicenseTypes.customerLicenseTypeList',
+                        path: `${CONCEPTS_PREFIX_PATH}/customerLicenseTypes/customerLicenseType-list`,
+                        title: 'لیست نوع مجوزهای کاربران',
+                        translateKey: 'nav.conceptsCustomerLicenseTypes.customerLicenseTypeList',
+                        icon: 'customerLicenseTypeList',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsCustomerLicenseTypes.customerLicenseTypeListDesc',
+                                label: 'لیست تمام نوع مجوزهای کاربران',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.customerLicenseTypes.customerLicenseTypeCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/customerLicenseTypes/customerLicenseType-create`,
+                        title: 'افزودن نوع مجوز کاربر',
+                        translateKey: 'nav.conceptsCustomerLicenseTypes.customerLicenseTypeCreate',
+                        icon: 'customerLicenseTypeCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsCustomerLicenseTypes.customerLicenseTypeCreateDesc',
+                                label: 'افزودن نوع مجوز کاربر جدید',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'concepts.activityFields',
+                path: '',
+                title: 'حوزه های کاری',
+                translateKey: 'nav.conceptsActivityFields.activityFields',
+                icon: 'activityFields',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsActivityFields.activityFieldsDesc',
+                        label: 'مدیریت حوزه های کاری',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'concepts.activityFields.activityFieldList',
+                        path: `${CONCEPTS_PREFIX_PATH}/activityFields/activityField-list`,
+                        title: 'لیست حوزه های کاری',
+                        translateKey: 'nav.conceptsActivityFields.activityFieldList',
+                        icon: 'activityFieldList',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsActivityFields.activityFieldListDesc',
+                                label: 'لیست تمام حوزه های کاری',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.activityFields.activityFieldCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/activityFields/activityField-create`,
+                        title: 'افزودن حوزه کاری',
+                        translateKey: 'nav.conceptsActivityFields.activityFieldCreate',
+                        icon: 'activityFieldCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsActivityFields.activityFieldCreateDesc',
+                                label: 'افزودن حوزه کاری جدید',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'concepts.locations',
+                path: '',
+                title: 'مکان ها',
+                translateKey: 'nav.conceptsLocations.locations',
+                icon: 'locations',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsLocations.locationsDesc',
+                        label: 'مدیریت مکان ها',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'concepts.locations.locationList',
+                        path: `${CONCEPTS_PREFIX_PATH}/locations/location-list`,
+                        title: 'لیست مکان ها',
+                        translateKey: 'nav.conceptsLocations.locationList',
+                        icon: 'locationList',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsLocations.locationListDesc',
+                                label: 'لیست تمام مکان ها',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.locations.locationCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/locations/location-create`,
+                        title: 'افزودن مکان',
+                        translateKey: 'nav.conceptsLocations.locationCreate',
+                        icon: 'locationCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsLocations.locationCreateDesc',
+                                label: 'افزودن مکان جدید',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'concepts.profileDataTypes',
+                path: '',
+                title: 'انواع دیتا پروفایل',
+                translateKey: 'nav.conceptsProfileDataTypes.profileDataTypes',
+                icon: 'profileDataTypes',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsProfileDataTypes.profileDataTypesDesc',
+                        label: 'مدیریت انواع دیتا پروفایل',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'concepts.profileDataTypes.profileDataTypeList',
+                        path: `${CONCEPTS_PREFIX_PATH}/profileDataTypes/profileDataType-list`,
+                        title: 'لیست انواع دیتا پروفایل',
+                        translateKey: 'nav.conceptsProfileDataTypes.profileDataTypeList',
+                        icon: 'profileDataTypeList',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsProfileDataTypes.profileDataTypeListDesc',
+                                label: 'لیست تمام انواع دیتا پروفایل',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.profileDataTypes.profileDataTypeCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/profileDataTypes/profileDataType-create`,
+                        title: 'افزودن نوع دیتا پروفایل',
+                        translateKey: 'nav.conceptsProfileDataTypes.profileDataTypeCreate',
+                        icon: 'profileDataTypeCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsProfileDataTypes.profileDataTypeCreateDesc',
+                                label: 'افزودن نوع دیتا پروفایل جدید',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'concepts.profiles',
+                path: '',
+                title: 'پروفایل ها',
+                translateKey: 'nav.conceptsProfiles.profiles',
+                icon: 'profiles',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                meta: {
+                    description: {
+                        translateKey: 'nav.conceptsProfiles.profilesDesc',
+                        label: 'مدیریت پروفایل ها',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'concepts.profiles.profileList',
+                        path: `${CONCEPTS_PREFIX_PATH}/profiles/profile-list`,
+                        title: 'لیست پروفایل ها',
+                        translateKey: 'nav.conceptsProfiles.profileList',
+                        icon: 'profileList',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsProfiles.profileListDesc',
+                                label: 'لیست تمام پروفایل ها',
+                            },
+                        },
+                        subMenu: [],
+                    },
+                    {
+                        key: 'concepts.profiles.profileCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/profiles/profile-create`,
+                        title: 'افزودن پروفایل',
+                        translateKey: 'nav.conceptsProfiles.profileCreate',
+                        icon: 'profileCreate',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        meta: {
+                            description: {
+                                translateKey: 'nav.conceptsProfiles.profileCreateDesc',
+                                label: 'افزودن پروفایل جدید',
                             },
                         },
                         subMenu: [],
@@ -261,7 +428,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsProducts.productsDesc',
-                        label: 'مدیریت موجودی محصولات',
+                        label: 'مدیریت محصولات',
                     },
                 },
                 subMenu: [
@@ -276,23 +443,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         meta: {
                             description: {
                                 translateKey: 'nav.conceptsProducts.productListDesc',
-                                label: 'تمام محصولات لیست شده',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.products.productEdit',
-                        path: `${CONCEPTS_PREFIX_PATH}/products/product-edit/12`,
-                        title: 'ویرایش محصول',
-                        translateKey: 'nav.conceptsProducts.productEdit',
-                        icon: 'productEdit',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsProducts.productEditDesc',
-                                label: 'ویرایش جزئیات محصول',
+                                label: 'لیست تمام محصولات',
                             },
                         },
                         subMenu: [],
@@ -316,314 +467,56 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 ],
             },
             {
-                key: 'concepts.orders',
+                key: 'concepts.brands',
                 path: '',
-                title: 'سفارش‌ها',
-                translateKey: 'nav.conceptsOrders.orders',
-                icon: 'orders',
+                title: 'برند ها',
+                translateKey: 'nav.conceptsBrands.brands',
+                icon: 'brands',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 meta: {
                     description: {
-                        translateKey: 'nav.conceptsOrders.ordersDesc',
-                        label: 'مدیریت سفارشات مشتریان',
+                        translateKey: 'nav.conceptsBrands.brandsDesc',
+                        label: 'مدیریت برند ها',
                     },
                 },
                 subMenu: [
                     {
-                        key: 'concepts.orders.orderList',
-                        path: `${CONCEPTS_PREFIX_PATH}/orders/order-list`,
-                        title: 'لیست سفارش',
-                        translateKey: 'nav.conceptsOrders.orderList',
-                        icon: 'orderList',
+                        key: 'concepts.brands.brandList',
+                        path: `${CONCEPTS_PREFIX_PATH}/brands/brand-list`,
+                        title: 'لیست برند ها',
+                        translateKey: 'nav.conceptsBrands.brandList',
+                        icon: 'brandList',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
                         meta: {
                             description: {
-                                translateKey: 'nav.conceptsOrders.orderListDesc',
-                                label: 'مشاهده تمامی سفارشات مشتریان',
+                                translateKey: 'nav.conceptsBrands.brandListDesc',
+                                label: 'لیست تمام برند ها',
                             },
                         },
                         subMenu: [],
                     },
                     {
-                        key: 'concepts.orders.orderEdit',
-                        path: `${CONCEPTS_PREFIX_PATH}/orders/order-edit/95954`,
-                        title: 'ویرایش سفارش',
-                        translateKey: 'nav.conceptsOrders.orderEdit',
-                        icon: 'orderEdit',
+                        key: 'concepts.brands.brandCreate',
+                        path: `${CONCEPTS_PREFIX_PATH}/brands/brand-create`,
+                        title: 'افزودن برند',
+                        translateKey: 'nav.conceptsBrands.brandCreate',
+                        icon: 'brandCreate',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
                         meta: {
                             description: {
-                                translateKey: 'nav.conceptsOrders.orderEditDesc',
-                                label: 'ویرایش جزئیات سفارش',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.orders.orderCreate',
-                        path: `${CONCEPTS_PREFIX_PATH}/orders/order-create`,
-                        title: 'ایجاد سفارش',
-                        translateKey: 'nav.conceptsOrders.orderCreate',
-                        icon: 'orderCreate',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsOrders.orderCreateDesc',
-                                label: 'ایجاد سفارش جدید',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.orders.orderDetails',
-                        path: `${CONCEPTS_PREFIX_PATH}/orders/order-details/95954`,
-                        title: 'جزئیات سفارش',
-                        translateKey: 'nav.conceptsOrders.orderDetails',
-                        icon: 'ordeDetails',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsOrders.orderDetailsDesc',
-                                label: 'اطلاعات دقیق سفارش',
+                                translateKey: 'nav.conceptsBrands.brandCreateDesc',
+                                label: 'افزودن برند جدید',
                             },
                         },
                         subMenu: [],
                     },
                 ],
             },
-            {
-                key: 'concepts.account',
-                path: '',
-                title: 'حساب کاربری',
-                translateKey: 'nav.conceptsAccount.account',
-                icon: 'account',
-                type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.conceptsAccount.accountDesc',
-                        label: 'تنظیمات و اطلاعات حساب کاربری',
-                    },
-                },
-                subMenu: [
-                    {
-                        key: 'concepts.account.settings',
-                        path: `${CONCEPTS_PREFIX_PATH}/account/settings`,
-                        title: 'تنظیمات',
-                        translateKey: 'nav.conceptsAccount.settings',
-                        icon: 'accountSettings',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsAccount.settingsDesc',
-                                label: 'پیکربندی تنظیمات شما',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.account.activityLog',
-                        path: `${CONCEPTS_PREFIX_PATH}/account/activity-log`,
-                        title: 'گزارش فعالیت',
-                        translateKey: 'nav.conceptsAccount.activityLog',
-                        icon: 'accountActivityLogs',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsAccount.activityLogDesc',
-                                label: 'مشاهده فعالیت‌های اخیر',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.account.rolesPermissions',
-                        path: `${CONCEPTS_PREFIX_PATH}/account/roles-permissions`,
-                        title: 'نقش‌ها و وظایف',
-                        translateKey: 'nav.conceptsAccount.rolesPermissions',
-                        icon: 'accountRoleAndPermission',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsAccount.rolesPermissionsDesc',
-                                label: 'مدیریت نقش‌ها و وظایف',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.account.pricing',
-                        path: `${CONCEPTS_PREFIX_PATH}/account/pricing`,
-                        title: 'قیمت‌گذاری',
-                        translateKey: 'nav.conceptsAccount.pricing',
-                        icon: 'accountPricing',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsAccount.pricingDesc',
-                                label: 'مشاهده طرح‌های قیمت‌گذاری',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                ],
-            },         
-            {
-                key: 'concepts.helpCenter',
-                path: '',
-                title: 'مرکز راهنما',
-                translateKey: 'nav.conceptsHelpCenter.helpCenter',
-                icon: 'helpCenter',
-                type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.conceptsHelpCenter.helpCenterDesc',
-                        label: 'پشتیبانی و مقالات',
-                    },
-                },
-                subMenu: [
-                    {
-                        key: 'concepts.helpCenter.supportHub',
-                        path: `${CONCEPTS_PREFIX_PATH}/help-center/support-hub`,
-                        title: 'مرکز پشتیبانی',
-                        translateKey: 'nav.conceptsHelpCenter.supportHub',
-                        icon: 'helpCeterSupportHub',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsHelpCenter.supportHubDesc',
-                                label: 'مرکز اصلی پشتیبانی',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.helpCenter.article',
-                        path: `${CONCEPTS_PREFIX_PATH}/help-center/article/pWBKE_0UiQ`,
-                        title: 'مقاله',
-                        translateKey: 'nav.conceptsHelpCenter.article',
-                        icon: 'helpCeterArticle',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsHelpCenter.articleDesc',
-                                label: 'خواندن مقالات پشتیبانی',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.helpCenter.editArticle',
-                        path: `${CONCEPTS_PREFIX_PATH}/help-center/edit-article/pWBKE_0UiQ`,
-                        title: 'ویرایش مقاله',
-                        translateKey: 'nav.conceptsHelpCenter.editArticle',
-                        icon: 'helpCeterEditArticle',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsHelpCenter.editArticleDesc',
-                                label: 'ویرایش محتوای مقاله',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                    {
-                        key: 'concepts.helpCenter.manageArticle',
-                        path: `${CONCEPTS_PREFIX_PATH}/help-center/manage-article`,
-                        title: 'مدیریت مقاله',
-                        translateKey: 'nav.conceptsHelpCenter.manageArticle',
-                        icon: 'helpCeterManageArticle',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
-                        meta: {
-                            description: {
-                                translateKey: 'nav.conceptsHelpCenter.manageArticleDesc',
-                                label: 'مدیریت مقالات',
-                            },
-                        },
-                        subMenu: [],
-                    },
-                ],
-            },
-            {
-                key: 'concepts.calendar',
-                path: `${CONCEPTS_PREFIX_PATH}/calendar`,
-                title: 'تقویم',
-                translateKey: 'nav.calendar',
-                icon: 'calendar',
-                type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.calendarDesc',
-                        label: 'برنامه و رویدادها',
-                    },
-                },
-                subMenu: [],
-            },
-            {
-                key: 'concepts.fileManager',
-                path: `${CONCEPTS_PREFIX_PATH}/file-manager`,
-                title: 'مدیریت فایل',
-                translateKey: 'nav.fileManager',
-                icon: 'fileManager',
-                type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.fileManagerDesc',
-                        label: 'مدیریت فایل‌های شما',
-                    },
-                },
-                subMenu: [],
-            },
-            {
-                key: 'concepts.mail',
-                path: `${CONCEPTS_PREFIX_PATH}/mail`,
-                title: 'ایمیل',
-                translateKey: 'nav.mail',
-                icon: 'mail',
-                type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.mailDesc',
-                        label: 'مدیریت ایمیل‌های شما',
-                    },
-                },
-                subMenu: [],
-            },
-            {
-                key: 'concepts.chat',
-                path: `${CONCEPTS_PREFIX_PATH}/chat`,
-                title: 'چت',
-                translateKey: 'nav.chat',
-                icon: 'chat',
-                type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
-                meta: {
-                    description: {
-                        translateKey: 'nav.chatDesc',
-                        label: 'چت با دوستان',
-                    },
-                },
-                subMenu: [],
-            },
-            
-        ],
+          
+                   ],
     },
 ]
 

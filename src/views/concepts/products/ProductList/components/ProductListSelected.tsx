@@ -1,6 +1,13 @@
+
 import { useState } from 'react'
 import StickyFooter from '@/components/shared/StickyFooter'
 import Button from '@/components/ui/Button'
+import Dialog from '@/components/ui/Dialog'
+import Avatar from '@/components/ui/Avatar'
+import Tooltip from '@/components/ui/Tooltip'
+import Notification from '@/components/ui/Notification'
+import toast from '@/components/ui/toast'
+import RichTextEditor from '@/components/shared/RichTextEditor'
 import ConfirmDialog from '@/components/shared/ConfirmDialog'
 import useProductList from '../hooks/useProductList'
 import { TbChecks } from 'react-icons/tb'
@@ -33,7 +40,7 @@ const ProductListSelected = () => {
         setSelectAllProduct([])
         mutate(
             {
-                list: newProductList,
+                products: newProductList,
                 total: productListTotal - selectedProduct.length,
             },
             false,
@@ -45,7 +52,7 @@ const ProductListSelected = () => {
         <>
             {selectedProduct.length > 0 && (
                 <StickyFooter
-                    className="flex items-center justify-between py-4 bg-white dark:bg-gray-800"
+                    className=" flex items-center justify-between py-4 bg-white dark:bg-gray-800"
                     stickyClass="-mx-4 sm:-mx-8 border-t border-gray-200 dark:border-gray-700 px-8"
                     defaultClass="container mx-auto px-8 rounded-xl border border-gray-200 dark:border-gray-600 mt-4"
                 >
@@ -60,7 +67,7 @@ const ProductListSelected = () => {
                                         <span className="font-semibold flex items-center gap-1">
                                             <span className="heading-text">
                                                 {selectedProduct.length}{' '}
-                                                محصولات
+                                                محصول ها
                                             </span>
                                             <span>انتخاب شده</span>
                                         </span>
@@ -78,8 +85,9 @@ const ProductListSelected = () => {
                                     }
                                     onClick={handleDelete}
                                 >
-                                    حذف
+                                    حذف کنید
                                 </Button>
+                                
                             </div>
                         </div>
                     </div>
@@ -88,7 +96,7 @@ const ProductListSelected = () => {
             <ConfirmDialog
                 isOpen={deleteConfirmationOpen}
                 type="danger"
-                title="حذف محصولات"
+                title="محصول ها را حذف کنید"
                 onClose={handleCancel}
                 onRequestClose={handleCancel}
                 onCancel={handleCancel}
@@ -96,12 +104,14 @@ const ProductListSelected = () => {
             >
                 <p>
                     {' '}
-                    آیا مطمئن هستید که می خواهید این محصولات را حذف کنید؟ این اقدام
+                    آیا مطمئنید که می خواهید این محصول ها را حذف کنید؟ این اقدام
                     قابل لغو نیست.{' '}
                 </p>
             </ConfirmDialog>
+           
         </>
     )
 }
 
 export default ProductListSelected
+

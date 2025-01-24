@@ -23,6 +23,7 @@ const conceptsRoute: Routes = [
             pageBackgroundType: 'plain',
         },
     },
+
     {
         key: 'concepts.customers.customerList',
         path: `${CONCEPTS_PREFIX_PATH}/customers/customer-list`,
@@ -76,6 +77,531 @@ const conceptsRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+
+    {
+        key: 'concepts.brands.brandList',
+        path: `${CONCEPTS_PREFIX_PATH}/brands/brand-list`,
+        component: lazy(
+            () => import('@/views/concepts/brands/brandList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.brands.brandEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/brands/brand-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/brands/brandEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش برند',
+                description:
+                    'Manage brand details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.brands.brandCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/brands/brand-create`,
+        component: lazy(
+            () => import('@/views/concepts/brands/brandCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد برند',
+                description:
+                    'Manage brand details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.brands.brandDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/brands/brand-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/brands/brandDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.products.productList',
+        path: `${CONCEPTS_PREFIX_PATH}/products/product-list`,
+        component: lazy(
+            () => import('@/views/concepts/products/productList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.products.productEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/products/product-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/products/productEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش محصول',
+                description:
+                    'Manage product details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.products.productCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/products/product-create`,
+        component: lazy(
+            () => import('@/views/concepts/products/productCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد محصول',
+                description:
+                    'Manage product details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.products.productDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/products/product-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/products/productDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.customerTitles.customerTitleList',
+        path: `${CONCEPTS_PREFIX_PATH}/customerTitles/customerTitle-list`,
+        component: lazy(
+            () => import('@/views/concepts/customerTitles/customerTitleList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.customerTitles.customerTitleEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/customerTitles/customerTitle-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/customerTitles/customerTitleEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش عنوان مشتری',
+                description:
+                    'Manage customerTitle details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.customerTitles.customerTitleCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/customerTitles/customerTitle-create`,
+        component: lazy(
+            () => import('@/views/concepts/customerTitles/customerTitleCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد عنوان مشتری',
+                description:
+                    'Manage customerTitle details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.customerTitles.customerTitleDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/customerTitles/customerTitle-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/customerTitles/customerTitleDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.workerEvents.workerEventList',
+        path: `${CONCEPTS_PREFIX_PATH}/workerEvents/workerEvent-list`,
+        component: lazy(
+            () => import('@/views/concepts/workerEvents/workerEventList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+  
+    {
+        key: 'concepts.workerEvents.workerEventCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/workerEvents/workerEvent-create`,
+        component: lazy(
+            () => import('@/views/concepts/workerEvents/workerEventCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد ایونت ورکر',
+                description:
+                    'Manage workerEvent details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.workerEvents.workerEventDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/workerEvents/workerEvent-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/workerEvents/workerEventDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.logs.logList',
+        path: `${CONCEPTS_PREFIX_PATH}/logs/log-list`,
+        component: lazy(
+            () => import('@/views/concepts/logs/logList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.logs.logEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/logs/log-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/logs/logEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش لاگ',
+                description:
+                    'Manage log details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.logs.logCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/logs/log-create`,
+        component: lazy(
+            () => import('@/views/concepts/logs/logCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد لاگ',
+                description:
+                    'Manage log details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.logs.logDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/logs/log-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/logs/logDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.activityFields.activityFieldList',
+        path: `${CONCEPTS_PREFIX_PATH}/activityFields/activityField-list`,
+        component: lazy(
+            () => import('@/views/concepts/activityFields/activityFieldList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.activityFields.activityFieldEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/activityFields/activityField-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/activityFields/activityFieldEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش ضمینه فعالیت',
+                description:
+                    'Manage activityField details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.activityFields.activityFieldCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/activityFields/activityField-create`,
+        component: lazy(
+            () => import('@/views/concepts/activityFields/activityFieldCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد ضمینه فعالیت',
+                description:
+                    'Manage activityField details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.activityFields.activityFieldDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/activityFields/activityField-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/activityFields/activityFieldDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.locations.locationList',
+        path: `${CONCEPTS_PREFIX_PATH}/locations/location-list`,
+        component: lazy(
+            () => import('@/views/concepts/locations/locationList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.locations.locationEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/locations/location-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/locations/locationEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش لوکیشن',
+                description:
+                    'Manage location details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.locations.locationCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/locations/location-create`,
+        component: lazy(
+            () => import('@/views/concepts/locations/locationCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد لوکیشن',
+                description:
+                    'Manage location details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.locations.locationDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/locations/location-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/locations/locationDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.ProfileDataTypes.ProfileDataTypeList',
+        path: `${CONCEPTS_PREFIX_PATH}/ProfileDataTypes/ProfileDataType-list`,
+        component: lazy(
+            () => import('@/views/concepts/ProfileDataTypes/ProfileDataTypeList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.ProfileDataTypes.ProfileDataTypeEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/ProfileDataTypes/ProfileDataType-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/ProfileDataTypes/ProfileDataTypeEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش نوع اطلاعات پروفایل',
+                description:
+                    'Manage ProfileDataType details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.ProfileDataTypes.ProfileDataTypeCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/ProfileDataTypes/ProfileDataType-create`,
+        component: lazy(
+            () => import('@/views/concepts/ProfileDataTypes/ProfileDataTypeCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد نوع اطلاعات پروفایل',
+                description:
+                    'Manage ProfileDataType details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.ProfileDataTypes.ProfileDataTypeDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/ProfileDataTypes/ProfileDataType-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/ProfileDataTypes/ProfileDataTypeDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.profiles.profileList',
+        path: `${CONCEPTS_PREFIX_PATH}/profiles/profile-list`,
+        component: lazy(
+            () => import('@/views/concepts/profiles/profileList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.profiles.profileEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/profiles/profile-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/profiles/profileEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش پروفایل',
+                description:
+                    'Manage profile details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.profiles.profileCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/profiles/profile-create`,
+        component: lazy(
+            () => import('@/views/concepts/profiles/profileCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد پروفایل',
+                description:
+                    'Manage profile details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.profiles.profileDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/profiles/profile-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/profiles/profileDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'concepts.users.userList',
+        path: `${CONCEPTS_PREFIX_PATH}/users/user-list`,
+        component: lazy(
+            () => import('@/views/concepts/users/userList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'concepts.users.userEdit',
+        path: `${CONCEPTS_PREFIX_PATH}/users/user-edit/:id`,
+        component: lazy(
+            () => import('@/views/concepts/users/userEdit'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ویرایش کاربر',
+                description:
+                    'Manage user details, purchase history, and preferences.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.users.userCreate',
+        path: `${CONCEPTS_PREFIX_PATH}/users/user-create`,
+        component: lazy(
+            () => import('@/views/concepts/users/userCreate'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            header: {
+                title: 'ایجاد کاربر',
+                description:
+                    'Manage user details, track purchases, and update preferences easily.',
+                contained: true,
+            },
+            footer: false,
+        },
+    },
+    {
+        key: 'concepts.users.userDetails',
+        path: `${CONCEPTS_PREFIX_PATH}/users/user-details/:id`,
+        component: lazy(
+            () => import('@/views/concepts/users/userDetails'),
+        ),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
     {
         key: 'concepts.products.productList',
         path: `${CONCEPTS_PREFIX_PATH}/products/product-list`,

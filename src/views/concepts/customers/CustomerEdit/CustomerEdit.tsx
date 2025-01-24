@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import Container from '@/components/shared/Container'
 import Button from '@/components/ui/Button'
@@ -13,6 +14,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import useSWR from 'swr'
 import type { CustomerFormSchema } from '../CustomerForm'
 import type { Customer } from '../CustomerList/types'
+import { apiUpdateCustomer } from '@/services/CustomersService'
 
 const CustomerEdit = () => {
     const { id } = useParams()
@@ -20,9 +22,9 @@ const CustomerEdit = () => {
     const navigate = useNavigate()
 
     const { data, isLoading } = useSWR(
-        [`/api/customers${id}`, { id: id as string }],
+        [`/api/customer${id}`, { id: id as string }],
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ([_, params]) => apiGetCustomer<Customer, { id: string }>(params),
+        ([_, params]) => apiGetCustomer<Customer>(id),
         {
             revalidateOnFocus: false,
             revalidateIfStale: false,
@@ -33,32 +35,68 @@ const CustomerEdit = () => {
     const [isSubmiting, setIsSubmiting] = useState(false)
 
     const handleFormSubmit = async (values: CustomerFormSchema) => {
-        console.log('Submitted values', values)
         setIsSubmiting(true)
-        await sleep(800)
+        try {
+            const response = apiUpdateCustomer(values);
+            setIsSubmiting(false)
+
+            if ((await response).status === 200) {
+                toast.push(
+                    <Notification type="success">مشتری ویرایش شد!</Notification>,
+                    { placement: 'top-center' },
+                )
+                navigate('/concepts/customers/customer-list')
+                return;
+            }
+            if ((await response).status === 400) {
+                toast.push(
+                    <Notification type="danger">${(await response).data}</Notification>,
+                    { placement: 'top-center' },
+                )
+            }
+        }
+        catch (error) {
+            console.log('catch is here');
+            console.log(error);
+            //console.log(error.response);
+        }
         setIsSubmiting(false)
-        toast.push(<Notification type="success">تغییرات ذخیره شد!</Notification>, {
-            placement: 'top-center',
-        })
-        navigate('/concepts/customers/customer-list')
+        toast.push(
+            <Notification type="danger">مشکلی در انجام عملیات پیش آمد</Notification>,
+            { placement: 'top-center' },
+        )
     }
 
     const getDefaultValues = () => {
         if (data) {
-            const { firstName, lastName, email, personalInfo, img } = data
+            const {
+                 id,
+                 customerTitleId,
+displayName,
+locationId,
+phoneNumber,
+jobStart,
+jobEnd,
+jobInterval,
+activityFieldId,
+firstName,
+lastName,
+legalName,
+            } = data
 
             return {
-                firstName,
-                lastName,
-                email,
-                img,
-                phoneNumber: personalInfo.phoneNumber,
-                dialCode: personalInfo.dialCode,
-                country: personalInfo.country,
-                address: personalInfo.address,
-                city: personalInfo.city,
-                postcode: personalInfo.postcode,
-                tags: [],
+                 id,
+                 customerTitleId,
+displayName,
+locationId,
+phoneNumber,
+jobStart,
+jobEnd,
+jobInterval,
+activityFieldId,
+firstName,
+lastName,
+legalName,
             }
         }
 
@@ -91,7 +129,7 @@ const CustomerEdit = () => {
             {!isLoading && !data && (
                 <div className="h-full flex flex-col items-center justify-center">
                     <NoUserFound height={280} width={280} />
-                    <h3 className="mt-8">کاربری پیدا نشد!</h3>
+                    <h3 className="mt-8">مشتری پیدا نشد!</h3>
                 </div>
             )}
             {!isLoading && data && (
@@ -138,7 +176,7 @@ const CustomerEdit = () => {
                     <ConfirmDialog
                         isOpen={deleteConfirmationOpen}
                         type="danger"
-                        title="مشتریان را حذف کنید"
+                        title="مشتری ها را حذف کنید"
                         onClose={handleCancel}
                         onRequestClose={handleCancel}
                         onCancel={handleCancel}

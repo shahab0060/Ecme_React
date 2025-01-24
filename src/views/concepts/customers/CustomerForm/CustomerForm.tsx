@@ -1,11 +1,9 @@
+
 import { useEffect } from 'react'
 import { Form } from '@/components/ui/Form'
 import Container from '@/components/shared/Container'
 import BottomStickyBar from '@/components/template/BottomStickyBar'
-import OverviewSection from './OverviewSection'
-import JobSection from './JobSection'
-import TagsSection from './TagsSection'
-import ProfileImageSection from './ProfileImageSection'
+import InputsSection from './InputsSection'
 import isEmpty from 'lodash/isEmpty'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -21,24 +19,29 @@ type CustomerFormProps = {
 } & CommonProps
 
 const validationSchema: ZodType<CustomerFormSchema> = z.object({
-    firstName: z.string().min(1, { message: 'نام لازم است' }),
-    lastName: z.string().min(1, { message: 'نام خانوادگی لازم است' }),
-    displayName: z.string().min(1, { message: 'نام نمایشی لازم است' }),
-    title: z.string().min(1, { message: 'عنوان لازم است' }),
-    jobStart: z.union([z.string(), z.number().min(1, 'شروع بازه ربات الزامی است!')]),
-
-    jobEnd: z.union([z.string(), z.number().min(1, 'پایان ربات الزامی است!')]),
-    jobInterval: z.union([z.string(), z.number().min(1, ' بازه ربات الزامی است!')]),
-    locationId: z.union([z.string(), z.number().min(1, 'لوکیشن الزامی است!')]),
-    activityFieldId: z.union([z.string(), z.number().min(1, 'حوزه فعالیت الزامی است!')]),
-
-    legalName: z.string().min(1, { message: 'نام قانونی لازم است' }),
-    phoneNumber: z
-        .string()
-        .min(11, { message: 'لطفاً شماره موبایل خود را وارد کنید' })
-        .max(11,{message:'شماره موبایل نمیتواند بیشتر از 11 کاراکتر باشد'}),
-    avatar: z.string(),
-    tags: z.array(z.object({ value: z.string(), label: z.string() })),
+    id: z.number(),
+    customerTitleId: z
+        .union([z.string(), z.number().min(1, { message: 'لطفاً عنوان را وارد کنید' })]),
+displayName: z
+        .string().min(1, { message: 'لطفاً نام نمایشی را وارد کنید' }).max(350,{message:'نام نمایشی نمیتواند بیشتر از 350 کاراکتر باشد'}),
+locationId: z
+        .union([z.string(), z.number().min(1, { message: 'لطفاً لوکیشن را وارد کنید' })]),
+phoneNumber: z
+        .string().min(11, { message: 'لطفاً شماره تلفن را وارد کنید' }).max(11,{message:'شماره تلفن نمیتواند بیشتر از 11 کاراکتر باشد'}),
+jobStart: z
+        .union([z.string(), z.number().min(1, { message: 'لطفاً ساعت شروع سرویس را وارد کنید' }).max(1000,{message:'ساعت شروع سرویس نمیتواند بیشتر از 1000 کاراکتر باشد'})]),
+jobEnd: z
+        .union([z.string(), z.number().min(1, { message: 'لطفاً ساعت پایان سرویس را وارد کنید' }).max(1000,{message:'ساعت پایان سرویس نمیتواند بیشتر از 1000 کاراکتر باشد'})]),
+jobInterval: z
+        .union([z.string(), z.number().min(1, { message: 'لطفاً بازه زمانی اجرا (دقیقه) را وارد کنید' }).max(1000,{message:'بازه زمانی اجرا (دقیقه) نمیتواند بیشتر از 1000 کاراکتر باشد'})]),
+activityFieldId: z
+        .union([z.string(), z.number().min(1, { message: 'لطفاً حوزه کاری را وارد کنید' })]),
+firstName: z
+        .string().min(1, { message: 'لطفاً نام را وارد کنید' }).max(250,{message:'نام نمیتواند بیشتر از 250 کاراکتر باشد'}),
+lastName: z
+        .string().min(1, { message: 'لطفاً نام خانوادگی را وارد کنید' }).max(250,{message:'نام خانوادگی نمیتواند بیشتر از 250 کاراکتر باشد'}),
+legalName: z
+        .string().max(250,{message:'نام قانونی نمیتواند بیشتر از 250 کاراکتر باشد'}),
 })
 
 
@@ -83,17 +86,9 @@ const CustomerForm = (props: CustomerFormProps) => {
             <Container>
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="gap-4 flex flex-col flex-auto">
-                        <OverviewSection control={control} errors={errors} />
-                        <JobSection control={control} errors={errors}/>
-                    </div>
-                    {/* <div className="md:w-[370px] gap-4 flex flex-col"> */}
-                        {/* <ProfileImageSection
-                            control={control}
-                            errors={errors}
-                        /> */}
-                        {/* <TagsSection control={control} errors={errors} /> */}
+                        <InputsSection control={control} errors={errors} />
                         
-                    {/* </div> */}
+                    </div>
                 </div>
             </Container>
             <BottomStickyBar>{children}</BottomStickyBar>
@@ -102,3 +97,4 @@ const CustomerForm = (props: CustomerFormProps) => {
 }
 
 export default CustomerForm
+

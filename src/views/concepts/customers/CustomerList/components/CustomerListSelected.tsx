@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import StickyFooter from '@/components/shared/StickyFooter'
 import Button from '@/components/ui/Button'
@@ -66,7 +67,7 @@ const CustomerListSelected = () => {
                                         <span className="font-semibold flex items-center gap-1">
                                             <span className="heading-text">
                                                 {selectedCustomer.length}{' '}
-                                                مشتریان
+                                                مشتری ها
                                             </span>
                                             <span>انتخاب شده</span>
                                         </span>
@@ -95,7 +96,7 @@ const CustomerListSelected = () => {
             <ConfirmDialog
                 isOpen={deleteConfirmationOpen}
                 type="danger"
-                title="مشتریان را حذف کنید"
+                title="مشتری ها را حذف کنید"
                 onClose={handleCancel}
                 onRequestClose={handleCancel}
                 onCancel={handleCancel}
@@ -103,7 +104,7 @@ const CustomerListSelected = () => {
             >
                 <p>
                     {' '}
-                    آیا مطمئنید که می خواهید این مشتریان را حذف کنید؟ این اقدام
+                    آیا مطمئنید که می خواهید این مشتری ها را حذف کنید؟ این اقدام
                     قابل لغو نیست.{' '}
                 </p>
             </ConfirmDialog>
@@ -113,3 +114,4 @@ const CustomerListSelected = () => {
 }
 
 export default CustomerListSelected
+

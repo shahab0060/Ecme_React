@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import Container from '@/components/shared/Container'
 import Button from '@/components/ui/Button'
@@ -72,20 +73,20 @@ const CustomerEdit = () => {
         <>
             <CustomerForm
                 newCustomer
+               
                 defaultValues={{
-                    firstName: '',
-                    lastName: '',
-                    phoneNumber: '',
-                    avatar: '',
-                    tags: [],
-                    displayName: '',
-                    legalName: '',
-                    locationId: 1,
-                    title: '',
-                    jobEnd: '',
-                    jobStart: '',
-                    jobInterval: '',
-                    activityFieldId: ''
+                    id:0,
+                    customerTitleId: 0,
+displayName: '',
+locationId: 0,
+phoneNumber: '',
+jobStart: 0,
+jobEnd: 0,
+jobInterval: 0,
+activityFieldId: 0,
+firstName: '',
+lastName: '',
+legalName: '',
                 }}
                 onFormSubmit={handleFormSubmit}
             >

@@ -114,7 +114,7 @@ const DefaultItem = (props: DefaultItemProps) => {
             </MenuItem>
         </AuthorityCheck>
     )
-}
+}   
 
 const VerticalSingleMenuItem = ({
     nav,

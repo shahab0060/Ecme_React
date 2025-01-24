@@ -6,11 +6,12 @@ import guideNavigationConfig from './guide.navigation.config'
 import type { NavigationTree } from '@/@types/navigation'
 
 const navigationConfig: NavigationTree[] = [
-    ...dashboardsNavigationConfig,
-    ...conceptsNavigationConfig,
-    ...uiComponentNavigationConfig,
-    ...authNavigationConfig,
-    ...guideNavigationConfig,
+    // ...dashboardsNavigationConfig,
+    // ...conceptsNavigationConfig,
+    // ...uiComponentNavigationConfig,
+    // ...authNavigationConfig,
+    // ...guideNavigationConfig,
+    ...conceptsNavigationConfig
 ]
 
 export default navigationConfig

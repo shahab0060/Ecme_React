@@ -1,24 +1,21 @@
-export type Product = {
-    id: string
-    name: string
-    productCode: string
-    img: string
-    category: string
-    price: number
-    stock: number
-    status: number
-    sales: number
-    salesPercentage: number
+
+export type GetProductsListResponse = {
+    products: Product[]
+    total: number
 }
 
 export type Filter = {
-    minAmount: number | string
-    maxAmount: number | string
-    productStatus: string
-    productType: string[]
+    purchasedProducts: string
+    purchaseChannel: Array<string>
 }
 
-export type GetProductListResponse = {
-    list: Product[]
-    total: number
+export type Product = {
+    id?:number
+    
+name?: string
+
+
+    createDate?:string    
+    latestEditDate?:string
 }
+

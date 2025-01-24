@@ -1,3 +1,4 @@
+
 import { apiGetCustomersList } from '@/services/CustomersService'
 import useSWR from 'swr'
 import { useCustomerListStore } from '../store/customerListStore'
@@ -16,7 +17,7 @@ export default function useCustomerList() {
     } = useCustomerListStore((state) => state)
 
     const { data, error, isLoading, mutate } = useSWR(
-        ['customer/list', { ...tableData, ...filterData }],
+        ['Customer/list', { ...tableData, ...filterData }],
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         ([_, params]) =>
             apiGetCustomersList<GetCustomersListResponse, TableQueries>(params),

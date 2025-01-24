@@ -1,3 +1,4 @@
+
 import { forwardRef } from 'react'
 import DebouceInput from '@/components/shared/DebouceInput'
 import { TbSearch } from 'react-icons/tb'
@@ -25,3 +26,4 @@ const CustomerListSearch = forwardRef<
 CustomerListSearch.displayName = 'CustomerListSearch'
 
 export default CustomerListSearch
+

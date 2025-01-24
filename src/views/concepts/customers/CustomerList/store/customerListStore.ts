@@ -1,13 +1,14 @@
+
 import { create } from 'zustand'
-import type { TableQueries2 } from '@/@types/common'
+import type { TableQueries } from '@/@types/common'
 import type { Customer, Filter } from '../types'
 
-export const initialTableData: TableQueries2 = {
+export const initialTableData: TableQueries = {
     pageId: 1,
     takeEntity: 10,
     search: '',
     sortType : 'Descending',
-    sortByFieldName:''
+    sort:'0'
 }
 
 export const initialFilterData = {
@@ -22,14 +23,14 @@ export const initialFilterData = {
 }
 
 export type CustomersListState = {
-    tableData: TableQueries2
+    tableData: TableQueries
     filterData: Filter
     selectedCustomer: Partial<Customer>[]
 }
 
 type CustomersListAction = {
     setFilterData: (payload: Filter) => void
-    setTableData: (payload: TableQueries2) => void
+    setTableData: (payload: TableQueries) => void
     setSelectedCustomer: (checked: boolean, customer: Customer) => void
     setSelectAllCustomer: (customer: Customer[]) => void
 }
@@ -66,3 +67,4 @@ export const useCustomerListStore = create<
         }),
     setSelectAllCustomer: (row) => set(() => ({ selectedCustomer: row })),
 }))
+

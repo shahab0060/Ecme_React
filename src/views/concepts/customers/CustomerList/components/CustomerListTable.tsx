@@ -1,4 +1,6 @@
+
 import { useMemo } from 'react'
+import { useState } from 'react'
 import Avatar from '@/components/ui/Avatar'
 import Tag from '@/components/ui/Tag'
 import Tooltip from '@/components/ui/Tooltip'
@@ -9,12 +11,10 @@ import cloneDeep from 'lodash/cloneDeep'
 import { TbPencil, TbEye, TbTrash } from 'react-icons/tb'
 import type { OnSortParam, ColumnDef, Row } from '@/components/shared/DataTable'
 import type { Customer } from '../types'
-import type { TableQueries2 } from '@/@types/common'
-
-const statusColor: Record<string, string> = {
-    'فعال': 'bg-emerald-200 dark:bg-emerald-200 text-gray-900 dark:text-gray-900',
-    'مسدود شده': 'bg-red-200 dark:bg-red-200 text-gray-900 dark:text-gray-900',
-}
+import type { TableQueries } from '@/@types/common'
+import { apiDeleteCustomer, apiGetCustomer, apiGetCustomersList } from '@/services/CustomersService'
+import Notification from '@/components/ui/Notification'
+import toast from '@/components/ui/toast'
 
 const NameColumn = ({ row }: { row: Customer }) => {
     return (
@@ -92,32 +92,74 @@ const CustomerListTable = () => {
     const handleViewDetails = (customer: Customer) => {
         navigate(`/concepts/customers/customer-details/${customer.id}`)
     }
+    const [isSubmiting, setIsSubmiting] = useState(false)
 
-    const handleDelete = (customer: Customer) => {
-        navigate(`/concepts/customers/customer-details/${customer.id}`)
+    const handleDelete = async (customer: Customer) => {
+        if (customer.id) {
+            try {
+                const response = await apiDeleteCustomer(customer.id);
+                setIsSubmiting(false)
+
+                if (response.status === 200) {
+                    toast.push(
+                        <Notification type="success">مشتری حذف شد!</Notification>,
+                        { placement: 'top-center' },
+                    )
+                    navigate('/concepts/customers/customer-list')
+                    return;
+                }
+                if (response.status === 400) {
+                    toast.push(
+                        <Notification type="danger">${response.data}</Notification>,
+                        { placement: 'top-center' },
+                    )
+                }
+                return;
+            }
+            catch {
+
+            }
+        }
+        toast.push(
+            <Notification type="danger">مشکلی در انجام عملیات پیش آمد</Notification>,
+            { placement: 'top-center' },
+        )
     }
 
     const columns: ColumnDef<Customer>[] = useMemo(
         () => [
             {
-                header: 'نام',
+                header: 'نام نمایشی',
                 accessorKey: 'displayName',
                 cell: (props) => {
                     const row = props.row.original
                     return <NameColumn row={row} />
                 },
             },
+            
+{
+                header: 'عنوان',
+                accessorKey: 'customerTitleTitle',
+            },
+
+{
+                header: 'لوکیشن',
+                accessorKey: 'locationTitle',
+            },
+
             {
                 header: 'شماره تلفن',
                 accessorKey: 'phoneNumber',
             },
-            {
-                header: 'مکان',
-                accessorKey: 'locationTitle',
-            },
-            {
+
+{
                 header: 'حوزه کاری',
                 accessorKey: 'activityFieldTitle',
+            },
+
+            {
+                header: 'نام قانونی',
+                accessorKey: 'legalName',
             },
             {
                 header: '',
@@ -139,7 +181,7 @@ const CustomerListTable = () => {
         [],
     )
 
-    const handleSetTableData = (data: TableQueries2) => {
+    const handleSetTableData = (data: TableQueries) => {
         setTableData(data)
         if (selectedCustomer.length > 0) {
             setSelectAllCustomer([])
@@ -160,10 +202,16 @@ const CustomerListTable = () => {
     }
 
     const handleSort = (sort: OnSortParam) => {
-        console.log(sort);
+        var key = sort.key;
+        var order = sort.order;
+        if (key == null || key == "" || key == '')
+            key = '0';
+        if (order == null || order == "")
+            order = 'ascending';
         const newTableData = cloneDeep(tableData)
-        newTableData.sortByFieldName = sort.key as string;
-        newTableData.sortType = sort.order;
+        newTableData.sort = key as string;
+        newTableData.sortType = order;
+
         handleSetTableData(newTableData)
     }
 

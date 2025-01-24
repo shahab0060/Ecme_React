@@ -10,14 +10,35 @@ import { Controller } from 'react-hook-form'
 import { components } from 'react-select'
 import type { FormSectionBaseProps } from './types'
 import type { ControlProps, OptionProps } from 'react-select'
+import CreatableSelect from 'react-select/creatable'
+import { apiGetCustomerTitlesCombo } from '@/services/CustomersService'
+import type { ComboDto } from '@/@types/common'
 
-type OverviewSectionProps = FormSectionBaseProps
-
-const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
+type InputsSectionProps = FormSectionBaseProps
+var params;
+const customerTitles = await apiGetCustomerTitlesCombo<ComboDto[], any>(params);
+const InputsSection = ({ control, errors }: InputsSectionProps) => {
     return (
         <Card>
             <h4 className="mb-6">نمای کلی</h4>
             <div className="grid md:grid-cols-2 gap-4">
+                <div style={{ display: 'none' }}>
+                    <FormItem
+                    >
+                        <Controller
+                            name="id"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    type="hidden"
+                                    autoComplete="off"
+                                    placeholder="آیدی"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                </div>
                 <FormItem
                     label="نام"
                     invalid={Boolean(errors.firstName)}
@@ -55,7 +76,7 @@ const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
                     />
                 </FormItem>
             </div>
-            
+
             <div className="flex items-end gap-4 w-full">
                 <FormItem
                     className="w-full"
@@ -119,19 +140,23 @@ const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
             </div>
             <div className="grid md:grid-cols-2 gap-4">
                 <FormItem
-                    label="عنوان"
-                    invalid={Boolean(errors.title)}
-                    errorMessage={errors.title?.message}
+                    label="عنوان مشتری"
+                    invalid={Boolean(errors.activityFieldId)}
+                    errorMessage={errors.activityFieldId?.message}
+                    className="w-full"
                 >
                     <Controller
-                        name="title"
+                        name="customerTitleId"
                         control={control}
                         render={({ field }) => (
-                            <Input
-                                type="text"
-                                autoComplete="off"
-                                placeholder="عنوان"
-                                {...field}
+                            <Select
+                                placeholder="عنوان مشتری را انتخاب کنید"
+                                componentAs={CreatableSelect}
+                                options={customerTitles.map((title) => ({
+                                    value: title.value, label: title.title,
+                                }))}
+
+                                onChange={(option) => { option != null && option.value != undefined ? field.onChange(option.value.toString()) : 0; }}
                             />
                         )}
                     />
@@ -159,4 +184,4 @@ const OverviewSection = ({ control, errors }: OverviewSectionProps) => {
     )
 }
 
-export default OverviewSection
+export default InputsSection

@@ -16,8 +16,13 @@ const ApiService = {
         })
     },
     post(url:string , data:any){
-        const jsonData = JSON.stringify(data);
         return AxiosBase.post(url,data);
+    },
+    put(url:string , data:any){
+        return AxiosBase.put(url,data);
+    },
+    delete(url:string , data:any){
+        return AxiosBase.delete(url,data);
     }
 }
 

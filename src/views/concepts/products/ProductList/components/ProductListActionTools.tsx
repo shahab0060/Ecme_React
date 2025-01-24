@@ -1,5 +1,6 @@
+
 import Button from '@/components/ui/Button'
-import { TbCloudDownload, TbPlus } from 'react-icons/tb'
+import { TbCloudDownload, TbUserPlus } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 import useProductList from '../hooks/useProductList'
 import { CSVLink } from 'react-csv'
@@ -11,20 +12,28 @@ const ProductListActionTools = () => {
 
     return (
         <div className="flex flex-col md:flex-row gap-3">
-            <CSVLink filename="product-list.csv" data={productList}>
-                <Button icon={<TbCloudDownload className="text-xl" />}>
-                    صادر کردن
+            <CSVLink
+                className="w-full"
+                filename="productList.csv"
+                data={productList}
+            >
+                <Button
+                    icon={<TbCloudDownload className="text-xl" />}
+                    className="w-full"
+                >
+                    دانلود کنید
                 </Button>
             </CSVLink>
             <Button
                 variant="solid"
-                icon={<TbPlus className="text-xl" />}
-                onClick={() => navigate('/concepts/customers/customer-create')}
+                icon={<TbUserPlus className="text-xl" />}
+                onClick={() => navigate('/concepts/products/product-create')}
             >
-                اضافه کردن محصولات
+               جدید اضافه کنید
             </Button>
         </div>
     )
 }
 
 export default ProductListActionTools
+

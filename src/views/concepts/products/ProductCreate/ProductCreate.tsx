@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import Container from '@/components/shared/Container'
 import Button from '@/components/ui/Button'
@@ -8,9 +9,11 @@ import ConfirmDialog from '@/components/shared/ConfirmDialog'
 import sleep from '@/utils/sleep'
 import { TbTrash } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
-import type { ProductFormSchema } from '../ProductForm/types'
+import type { ProductFormSchema } from '../ProductForm'
+import axios, { AxiosResponse } from 'axios'
+import { apiCreateProduct } from '@/services/ProductsService'
 
-const ProductCreate = () => {
+const ProductEdit = () => {
     const navigate = useNavigate()
 
     const [discardConfirmationOpen, setDiscardConfirmationOpen] =
@@ -18,21 +21,41 @@ const ProductCreate = () => {
     const [isSubmiting, setIsSubmiting] = useState(false)
 
     const handleFormSubmit = async (values: ProductFormSchema) => {
-        console.log('Submitted values', values)
         setIsSubmiting(true)
-        await sleep(800)
+        try {
+            const response = apiCreateProduct(values);
+            setIsSubmiting(false)
+
+            if ((await response).status === 200) {
+                toast.push(
+                    <Notification type="success">محصول ایجاد شد!</Notification>,
+                    { placement: 'top-center' },
+                )
+                navigate('/concepts/products/product-list')
+                return;
+            }
+            if ((await response).status === 400) {
+                toast.push(
+                    <Notification type="danger">${(await response).data}</Notification>,
+                    { placement: 'top-center' },
+                )
+            }
+        }
+        catch (error) {
+            console.log('catch is here');
+            console.log(error);
+        }
         setIsSubmiting(false)
         toast.push(
-            <Notification type="success">محصول ایجاد شد!</Notification>,
+            <Notification type="danger">مشکلی در انجام عملیات پیش آمد</Notification>,
             { placement: 'top-center' },
         )
-        navigate('/concepts/products/product-list')
     }
 
     const handleConfirmDiscard = () => {
         setDiscardConfirmationOpen(true)
         toast.push(
-            <Notification type="success">محصول دور ریخته شد!</Notification>,
+            <Notification type="success">محصول کنار گذاشته شد!</Notification>,
             { placement: 'top-center' },
         )
         navigate('/concepts/products/product-list')
@@ -50,18 +73,10 @@ const ProductCreate = () => {
         <>
             <ProductForm
                 newProduct
+               
                 defaultValues={{
+                    id:0,
                     name: '',
-                    description: '',
-                    productCode: '',
-                    taxRate: 0,
-                    price: '',
-                    bulkDiscountPrice: '',
-                    costPerItem: '',
-                    imgList: [],
-                    category: '',
-                    tags: [],
-                    brand: '',
                 }}
                 onFormSubmit={handleFormSubmit}
             >
@@ -101,12 +116,12 @@ const ProductCreate = () => {
                 onConfirm={handleConfirmDiscard}
             >
                 <p>
-                آیا مطمئنید که می خواهید این را کنار بگذارید؟ این اقدام نمی تواند
-                لغو شود.{' '}
+                    آیا مطمئنید که می خواهید این را کنار بگذارید؟ این اقدام نمی تواند
+                    لغو شود.{' '}
                 </p>
             </ConfirmDialog>
         </>
     )
 }
 
-export default ProductCreate
+export default ProductEdit
